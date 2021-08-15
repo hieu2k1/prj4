@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--css-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
+    <!--js-->
+    <script th:src="@{/js/min.js}"></script>
+
+</head>
+<body>
+<h1 style="color: red;size: 100px">Bạn Cần Đăng nhập bằng tài khoản Admin để sử dụng ! </h1>
+<a href="/user" style="color: white"><button type="button" class="okbtn">Quay Lại</button></a>
+<a href="/logout" style="color: white"><button type="button" class="cancelbtn">Đăng Xuất</button></a>
+</body>
+
+</html>

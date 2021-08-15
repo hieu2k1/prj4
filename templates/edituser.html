@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--css-->
+    <link th:href="@{/css/Bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
+    <!--js-->
+    <script th:src="@{/js/min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form method="post" th:action="@{/adduser}" th:object="${user}" id="form-1">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" th:field="${user.username}" placeholder="Ex: NguyenVanA">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="password" id="password" th:field="${user.password}">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation" class="form-label">Enter the password</label>
+                    <input type="text" class="form-control" name="password_confirmation" id="password_confirmation" >
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="phone" th:field="${user.phone}" placeholder="Ex: 0987654321" >
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="roleid" class="form-label">Roleid</label>
+                    <input type="text" class="form-control" name="roleid" id="roleid" th:field="${user.roleid}">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="date" style="display: block;
+    font: 1rem 'Fira Sans', sans-serif;margin: .4rem 0;">Date of birth</label>
+                    <input type="date" id="date" name="date"
+                           value="2021-07-15"
+                           min="1900-01-01" max="2021-07-15" style="margin: .4rem 0;"
+                           th:field="${user.dateofbirth}">
+                    <span class="form-message"></span>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="address" id="address" th:field="${user.address}" placeholder="Ex: Quan Hoa, Cau Giay, Ha Noi">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" th:field="${user.email}" placeholder="Ex: abc@gmail.com">
+                    <span class="form-message"></span>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary">Edit user</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/validator.js}"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#username', 'Vui lòng nhập tên đầy đủ của bạn'),
+            Validator.isRequired('#password'),
+            Validator.minLength('#password', 6),
+            Validator.isConfirmed('#password_confirmation', function() {
+                return document.querySelector('#form-1 #password').value;
+            },'Mật khẩu nhập lại không chính xác'),
+            Validator.isPhoneCheck('#phone',1),
+            Validator.isPhone('#phone', 10),
+            Validator.isRequired('#date'),
+            Validator.isRequired('#email'),
+            Validator.isEmail('#email', 'Trường này phải là email !')
+        ],
+    });
+
+</script>
+</body>
+</html>
